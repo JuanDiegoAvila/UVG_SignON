@@ -56,11 +56,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
     }
 
-    fun zoomLocation(position: LatLng) {
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 25f))
-        mMap.addMarker(MarkerOptions().position(position).title("Current position"))
-    }
-
     @SuppressLint("MissingPermission")
     fun getLastLocation(){
         if(checkPermission()){
@@ -74,7 +69,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         val longitud = location.longitude
                         val latitud = location.latitude
                         val current = LatLng(latitud,longitud)
-                        zoomLocation(current)
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(current, 25f))
+                        mMap.addMarker(MarkerOptions().position(current).title("Current position"))
                     }
                 }
             }else{
